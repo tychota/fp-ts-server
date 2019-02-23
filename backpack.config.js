@@ -6,6 +6,8 @@ module.exports = {
       extensions: [".ts", ".js", ".json"]
     };
 
+    config.module.rules[0].test = /\.(ts|js)x?$/;
+
     return config;
   }
 };
