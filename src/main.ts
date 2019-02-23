@@ -1,19 +1,16 @@
 import Koa from "koa";
-import Router from "koa-router";
-
-import { urlMiddleware } from "./middlewares/url";
+import { registerMiddlewares } from "./middlewares";
+import { registerRoutes } from "./routes";
 
 const app = new Koa();
 
-app.use(urlMiddleware);
+registerMiddlewares(app);
+registerRoutes(app);
 
-const router = new Router();
-
-router.get("/*", async ctx => {
-  ctx.body = "Hello World!";
+app.on("error", (err, ctx) => {
+  console.warn(err, ctx);
 });
-app.use(router.routes());
 
-app.listen(3000);
+export default app.listen(3000);
 
 console.log("Server running on port 3000");
