@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": false,
+    "emitDecoratorMetadata": false,
+    "outDir": "dist",
+    "pretty": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "lib": ["esnext"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/**/*.spec.ts"]
+}
