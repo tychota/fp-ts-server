@@ -4,7 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
 		"allowJs": true,
-		"noEmit": true,
+		"noEmit": false,
 		"isolatedModules": true,
 		"esModuleInterop": true,
     "importHelpers": true,
@@ -16,7 +16,8 @@
     "pretty": true,
     "removeComments": false,
     "sourceMap": true,
-    "lib": ["esnext"]
+    "lib": ["esnext", "dom"],
+    "baseUrl": "./src"
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"]

@@ -1,7 +1,8 @@
 module.exports = {
-  presets: ["backpack-core/babel", "@babel/typescript"],
+  presets: ["@babel/typescript"],
   plugins: [
-    "@babel/proposal-class-properties",
+    ["@babel/plugin-proposal-decorators", { legacy: true }],
+    ["@babel/proposal-class-properties", { loose: true }],
     "@babel/proposal-object-rest-spread"
   ]
 };

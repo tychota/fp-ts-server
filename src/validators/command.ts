@@ -1,8 +1,8 @@
-import t from "io-ts";
+import * as t from "io-ts";
 import { date } from "io-ts-types";
 
-import { UserV } from "./user";
-import { ProductV } from "./product";
+import { UserV } from "validators/user";
+import { ProductV } from "validators/product";
 
 const CommandItemV = t.type({
   product: ProductV,

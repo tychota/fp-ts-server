@@ -1,0 +1,6 @@
+---
+server:
+  logging: false
+database:
+  database: database/test.db
+  logging: false

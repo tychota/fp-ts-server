@@ -1,11 +1,26 @@
 import Router from "koa-router";
 import Koa from "koa";
-import { TUser } from "./validators/user";
+import { UserDBService } from "./services/db/user";
+
+import { getConnection } from "typeorm";
+
+import { handleError } from "./handlers/error";
+import { handleSuccess } from "./handlers/sucess";
 
 // Main
 const mainRouter = new Router();
 mainRouter.get("/OK", ctx => {
-  ctx.body = "OK";
+  const isDatabaseOK = getConnection().isConnected;
+  const ok = isDatabaseOK;
+  if (ok) {
+    ctx.body = "OK";
+    ctx.status = 200;
+  } else {
+    ctx.status = 503;
+  }
+});
+mainRouter.get("/status/db", ctx => {
+  ctx.body = getConnection().entityMetadatas.map(a => a.name);
   ctx.status = 200;
 });
 
@@ -14,14 +29,12 @@ const userRouter = new Router({
   prefix: "/users"
 });
 userRouter.get("/all", async ctx => {
-  ctx.body = [
-    {
-      firstName: "tycho",
-      lastName: "tatitscheff",
-      birthDate: new Date("16 Sep 1992 00:00:00 GMT"),
-      registrationDate: new Date(1550938148128)
-    }
-  ] as TUser[];
+  const result = await UserDBService.find().run();
+  result.fold(handleError(ctx), handleSuccess(ctx));
+});
+userRouter.post("/new", async ctx => {
+  const result = await UserDBService.create(ctx.request.body).run();
+  result.fold(handleError(ctx), handleSuccess(ctx));
 });
 
 // Register

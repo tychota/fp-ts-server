@@ -1,10 +1,10 @@
-import t from "io-ts";
-import { date } from "io-ts-types";
+import * as t from "io-ts";
+import { DateFromISOString } from "io-ts-types";
 
 export const UserV = t.type({
   firstName: t.string,
   lastName: t.string,
-  birthDate: date,
-  registrationDate: date
+  birthDate: DateFromISOString,
+  registrationDate: DateFromISOString
 });
 export type TUser = t.TypeOf<typeof UserV>;

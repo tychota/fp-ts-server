@@ -1,4 +1,4 @@
-import t from "io-ts";
+import * as t from "io-ts";
 import { Newtype } from "newtype-ts";
 import { fromNewtype } from "io-ts-types/lib/newtype-ts/fromNewtype";
 
