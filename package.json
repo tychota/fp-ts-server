@@ -30,7 +30,11 @@
     }
   },
   "dependencies": {
+    "fp-ts": "^1.14.2",
+    "io-ts": "^1.8.2",
+    "io-ts-types": "^0.4.2",
     "koa": "^2.7.0",
-    "koa-router": "^7.4.0"
+    "koa-router": "^7.4.0",
+    "newtype-ts": "^0.2.4"
   }
 }
