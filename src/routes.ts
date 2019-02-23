@@ -1,6 +1,6 @@
 import Router from "koa-router";
 import Koa from "koa";
-import { TUser } from "./data/user";
+import { TUser } from "./validators/user";
 
 // Main
 const mainRouter = new Router();
