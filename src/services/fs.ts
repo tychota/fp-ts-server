@@ -8,8 +8,7 @@ type TFSOption = string | number | fs.MakeDirectoryOptions | null | undefined;
 export class FileSystemService {
   public static allocateDir(uid: string): TaskEither<IError[], void> {
     const pathToUserDirectory = path.join("./documents", uid);
-    return taskify<PathLike, TFSOption, NodeJS.ErrnoException, void>(fs.mkdir)(pathToUserDirectory, null).mapLeft(
-      err => [err]
-    );
+    const taskFactory = taskify<PathLike, TFSOption, NodeJS.ErrnoException, void>(fs.mkdir);
+    return taskFactory(pathToUserDirectory, null).mapLeft(err => [err]);
   }
 }

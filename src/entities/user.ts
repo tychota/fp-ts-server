@@ -31,3 +31,8 @@ export const createUserEntityFromData = (data: TUser): User => {
   user.registrationDate = data.registrationDate;
   return user;
 };
+
+export const appendDirectoryToUser = (tempDir: string): ((user: User) => User) => (user: User) => {
+  user.directory = tempDir;
+  return user;
+};

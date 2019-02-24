@@ -3,7 +3,7 @@ import { Either } from "fp-ts/lib/Either";
 import { TaskEither, fromEither } from "fp-ts/lib/TaskEither";
 
 import { UserV } from "validators/user";
-import { createUserEntityFromData, User } from "entities/user";
+import { createUserEntityFromData, User, appendDirectoryToUser } from "entities/user";
 import { IError } from "types/error";
 import { save, find, findById } from "helpers/database";
 import { uuid } from "io-ts-types";
@@ -13,10 +13,7 @@ export class UserDBService {
     const parsedData = UserV.decode(data) as Either<IError[], User>;
     return fromEither(parsedData)
       .map(createUserEntityFromData)
-      .map(user => {
-        user.directory = tempDir;
-        return user;
-      })
+      .map(appendDirectoryToUser(tempDir))
       .chain(save(User));
   }
   public static find(): TaskEither<IError[], User[]> {

@@ -43,7 +43,6 @@ userRouter.post("/new", async ctx => {
   const result = await FileSystemService.allocateDir(directory)
     .chain(() => UserDBService.create(ctx.request.body, directory))
     .run();
-
   result.fold(handleError(ctx), handleSuccess(ctx));
 });
 
