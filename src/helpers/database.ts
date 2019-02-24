@@ -24,3 +24,12 @@ export const find = <A>(entity: Type<A>): (() => TaskEither<IError[], A[]>) => (
     },
     reason => [new Error(String(reason))]
   );
+
+export const findById = <A>(entity: Type<A>): ((id: string) => TaskEither<IError[], A>) => (id: string) =>
+  tryCatch(
+    async () => {
+      const repository = getManager().getRepository(entity);
+      return repository.findOneOrFail(id);
+    },
+    reason => [new Error(String(reason))]
+  );

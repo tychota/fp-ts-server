@@ -32,6 +32,10 @@ userRouter.get("/all", async ctx => {
   const result = await UserDBService.find().run();
   result.fold(handleError(ctx), handleSuccess(ctx));
 });
+userRouter.get("/:id", async ctx => {
+  const result = await UserDBService.findById(ctx.params.id).run();
+  result.fold(handleError(ctx), handleSuccess(ctx));
+});
 userRouter.post("/new", async ctx => {
   const result = await UserDBService.create(ctx.request.body).run();
   result.fold(handleError(ctx), handleSuccess(ctx));
