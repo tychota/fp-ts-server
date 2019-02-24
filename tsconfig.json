@@ -19,6 +19,6 @@
     "lib": ["esnext", "dom"],
     "baseUrl": "./src"
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "typings/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"]
 }

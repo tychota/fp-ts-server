@@ -1,6 +1,6 @@
 import { BaseContext } from "koa";
 import { ValidationError, getFunctionName, Context } from "io-ts";
-
+import { EntityNotFoundError } from "typeorm/error/EntityNotFoundError";
 import { IError } from "types/error";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -28,9 +28,12 @@ function getMessage(e: ValidationError): string {
 }
 
 export const handleError = (ctx: BaseContext): ((errors: IError[]) => void) => (errors: IError[]) => {
-  if (errors.some(e => e instanceof Error)) {
+  if (errors.length === 1 && errors[0] instanceof EntityNotFoundError) {
+    ctx.status = 404;
+    ctx.body = { data: null, errors: errors };
+  } else if (errors.some(e => e instanceof Error)) {
     ctx.status = 500;
-    ctx.body = errors.join(",");
+    ctx.body = { data: null, errors: errors };
   } else {
     ctx.status = 400;
     ctx.body = (errors as ValidationError[]).map(getMessage);

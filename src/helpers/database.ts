@@ -31,5 +31,5 @@ export const findById = <A>(entity: Type<A>): ((id: string) => TaskEither<IError
       const repository = getManager().getRepository(entity);
       return repository.findOneOrFail(id);
     },
-    reason => [new Error(String(reason))]
+    reason => [reason as IError]
   );

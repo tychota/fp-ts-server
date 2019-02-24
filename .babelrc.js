@@ -1,8 +1,0 @@
-module.exports = {
-  presets: ["@babel/typescript"],
-  plugins: [
-    ["@babel/plugin-proposal-decorators", { legacy: true }],
-    ["@babel/proposal-class-properties", { loose: true }],
-    "@babel/proposal-object-rest-spread"
-  ]
-};
