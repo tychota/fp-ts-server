@@ -9,10 +9,14 @@ import { save, find, findById } from "helpers/database";
 import { uuid } from "io-ts-types";
 
 export class UserDBService {
-  public static create(data: any): TaskEither<IError[], User> {
+  public static create(data: any, tempDir: string): TaskEither<IError[], User> {
     const parsedData = UserV.decode(data) as Either<IError[], User>;
     return fromEither(parsedData)
       .map(createUserEntityFromData)
+      .map(user => {
+        user.directory = tempDir;
+        return user;
+      })
       .chain(save(User));
   }
   public static find(): TaskEither<IError[], User[]> {

@@ -6,6 +6,8 @@ import { getConnection } from "typeorm";
 
 import { handleError } from "./handlers/error";
 import { handleSuccess } from "./handlers/sucess";
+import { FileSystemService } from "services/fs";
+import { random } from "helpers/random";
 
 // Main
 const mainRouter = new Router();
@@ -37,7 +39,11 @@ userRouter.get("/:id", async ctx => {
   result.fold(handleError(ctx), handleSuccess(ctx));
 });
 userRouter.post("/new", async ctx => {
-  const result = await UserDBService.create(ctx.request.body).run();
+  const directory = random.run();
+  const result = await FileSystemService.allocateDir(directory)
+    .chain(() => UserDBService.create(ctx.request.body, directory))
+    .run();
+
   result.fold(handleError(ctx), handleSuccess(ctx));
 });
 

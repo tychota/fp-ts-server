@@ -18,6 +18,9 @@ export class User {
 
   @Column("date")
   public registrationDate!: Date;
+
+  @Column({ length: 50 })
+  public directory!: string;
 }
 
 export const createUserEntityFromData = (data: TUser): User => {
