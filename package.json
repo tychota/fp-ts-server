@@ -16,7 +16,7 @@
     "newtype-ts": "^0.2.4",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.0.6",
-    "typeorm": "^0.2.13"
+    "typeorm": "^0.2.25"
   },
   "devDependencies": {
     "@types/config": "^0.0.34",
